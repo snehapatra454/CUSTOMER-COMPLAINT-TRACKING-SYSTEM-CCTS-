@@ -1,0 +1,15 @@
+.welcomePanel{
+    background: linear-gradient(135deg,#0a6ed1,#4dabf7) !important;
+}
+
+.welcomePanel .sapMPageCont{
+    background: linear-gradient(135deg,#0a6ed1,#4dabf7);
+}
+
+.welcomePanel .sapMTitle{
+    color:white;
+}
+
+.welcomePanel .sapMText{
+    color:white;
+}
