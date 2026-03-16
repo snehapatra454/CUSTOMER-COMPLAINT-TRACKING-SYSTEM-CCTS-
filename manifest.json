@@ -1,0 +1,140 @@
+{
+  "_version": "1.80.0",
+  "sap.app": {
+    "id": "project7",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.20.4",
+      "toolsId": "f4d85fb1-b89f-436a-a371-15d7e5ae23e1"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_complaint_bind1/srvd/sap/zui_complaint_srv/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.142.7",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "project7.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "project7.view",
+        "async": true,
+        "viewPath": "project7.view"
+      },
+      "routes": [
+        {
+          "name": "RouteLogin",
+          "pattern": "",
+          "target": [
+            "Login"
+          ]
+        },
+        {
+          "name": "RouteView1",
+          "pattern": "view1",
+          "target": [
+            "View1"
+          ]
+        },
+        {
+          "name": "RouteDetail",
+          "pattern": "detail/{contextPath}",
+          "target": [
+            "Detail"
+          ]
+        }
+      ],
+      "targets": {
+        "Login": {
+          "viewName": "Login",
+          "viewType": "XML"
+        },
+        "View1": {
+          "viewName": "View1",
+          "viewType": "XML"
+        },
+        "Detail": {
+          "viewName": "Detail",
+          "viewType": "XML"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "project7.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}
