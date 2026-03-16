@@ -1,0 +1,213 @@
+<mvc:View
+controllerName="project7.controller.View1"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+xmlns:smartTable="sap.ui.comp.smarttable"
+xmlns:table="sap.ui.table"
+xmlns:viz="sap.viz.ui5.controls"
+xmlns:viz.data="sap.viz.ui5.data"
+xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+
+<Page title="Complaint Management" enableScrolling="false">
+    <content>
+        <IconTabBar>
+            <items>
+                <IconTabFilter text="Complaints Table" icon="sap-icon://table-view">
+                    <VBox width="100%" class="sapUiSmallMargin">
+                        <Toolbar design="Transparent">
+                            <Title text="Complaints" level="H2"/>
+                            <ToolbarSpacer/>
+                            <Button text="Create Complaint" icon="sap-icon://add" type="Emphasized" press="onCreate"/>
+                            <SearchField width="300px" placeholder="Search Complaint / Customer" search="onSearch" liveChange="onSearch"/>
+                            <Select width="160px" change="onStatusFilter">
+                                <core:Item key="ALL" text="All"/>
+                                <core:Item key="OPEN" text="Open"/>
+                                <core:Item key="IN_PROGRESS" text="In Progress"/>
+                                <core:Item key="RESOLVED" text="Resolved"/>
+                            </Select>
+                            <DatePicker width="180px" change="onDateFilter" placeholder="Created Date"/>
+                        </Toolbar>
+                        <table:Table id="complaintTable" rows="{/ZC_COMPLAINT}" selectionMode="None" rowSelectionChange="onRowSelect">
+                            <table:columns>
+                                <table:Column sortProperty="ComplaintNo">
+                                    <Label text="Complaint ID"/>
+                                    <table:template>
+                                        <Link text="{ComplaintNo}" press="onRowSelect"/>
+                                    </table:template>
+                                </table:Column>
+                                <table:Column>
+                                    <Label text="Customer ID"/>
+                                    <table:template>
+                                        <Text text="{CustomerId}"/>
+                                    </table:template>
+                                </table:Column>
+                                <table:Column>
+                                    <Label text="Description"/>
+                                    <table:template>
+                                        <Text text="{ComplaintDesc}" wrapping="true"/>
+                                    </table:template>
+                                </table:Column>
+                                <table:Column>
+                                    <Label text="Status"/>
+                                    <table:template>
+                                        <ObjectStatus text="{Status}"
+                                                    inverted="true"
+                                                    state="{
+                                                    path:'Status',
+                                                    formatter:'.formatter.statusColor'
+                                                }"/>
+                                    </table:template>
+                                </table:Column>
+                                <table:Column>
+                                    <Label text="Created Date"/>
+                                    <table:template>
+                                        <Text text="{CreatedDate}"/>
+                                    </table:template>
+                                </table:Column>
+                            </table:columns>
+                        </table:Table>
+                        </VBox>
+                            </IconTabFilter>
+                                <IconTabFilter text="Analysis" icon="sap-icon://business-objects-experience">
+                                <VBox class="sapUiLargeMargin">
+                                    <HBox width="100%" justifyContent="Center" alignItems="Center">
+                                        <VBox width="50%" alignItems="Stretch">
+                                            <viz:VizFrame vizType="donut" width="90%" height="350px" uiConfig="{applicationSet:'fiori'}"
+                                                vizProperties="{
+                                                    title:{text:'Complaint Status'},
+                                                    legend:{visible:true},
+                                                    plotArea:{
+                                                        dataLabel:{
+                                                            visible:true,
+                                                            type:'labelAndPercentage',
+                                                            position:'inside'
+                                                        },
+                                                        innerRadius:'40%'
+                                                    }
+                                                }">
+                                                <viz:dataset>
+                                                    <viz.data:FlattenedDataset data="{donutModel>/data}">
+                                                        <viz.data:dimensions>
+                                                            <viz.data:DimensionDefinition name="Status" value="{donutModel>type}"/>
+                                                        </viz.data:dimensions>
+                                                        <viz.data:measures>
+                                                            <viz.data:MeasureDefinition name="Complaints" value="{donutModel>value}"/>
+                                                        </viz.data:measures>
+                                                    </viz.data:FlattenedDataset>
+                                                </viz:dataset>
+                                                <viz:feeds>
+                                                    <viz.feeds:FeedItem uid="size" type="Measure" values="Complaints"/>
+                                                    <viz.feeds:FeedItem uid="color" type="Dimension" values="Status"/>
+                                                </viz:feeds>
+                                            </viz:VizFrame>
+                                        </VBox>
+                                        <!-- <VBox width="500px">
+                                            <viz:VizFrame
+                                                vizType="column"
+                                                height="350px"
+                                                uiConfig="{applicationSet:'fiori'}"
+                                                vizProperties="{
+                                                    title:{text:'Monthly Complaints'},
+                                                        plotArea:{
+                                                            dataLabel:{
+                                                                visible:true
+                                                            }
+                                                        }
+                                                }">
+                                                <viz:dataset>
+                                                    <viz.data:FlattenedDataset data="{salesModel>/data}">
+                                                        <viz.data:dimensions>
+                                                            <viz.data:DimensionDefinition name="Month" value="{salesModel>month}"/>
+                                                        </viz.data:dimensions>
+
+                                                        <viz.data:measures>
+                                                            <viz.data:MeasureDefinition name="Complaints" value="{salesModel>sales}"/>
+                                                        </viz.data:measures>
+                                                    </viz.data:FlattenedDataset>
+                                                </viz:dataset>
+                                                <viz:feeds>
+                                                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Complaints"/>
+                                                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+                                                </viz:feeds>
+                                            </viz:VizFrame>
+                                        </VBox> -->
+
+                                        <VBox width="50%">
+
+    <!-- Select Control to change grouping -->
+    <HBox justifyContent="End" class="sapUiSmallMarginBottom">
+        <Select width="160px" change="onTimeChange" selectedKey="MONTH">
+            <core:Item key="DAY" text="Day"/>
+            <core:Item key="MONTH" text="Month"/>
+            <core:Item key="QUARTER" text="Quarter"/>
+            <core:Item key="YEAR" text="Year"/>
+        </Select>
+    </HBox>
+
+    <!-- Column Chart -->
+    <viz:VizFrame
+        vizType="column"
+        height="300px"
+        width="100%"
+        uiConfig="{applicationSet:'fiori'}"
+        vizProperties="{
+            title:{text:'Complaints Analysis'},
+            plotArea:{
+                dataLabel:{
+                    visible:true
+                }
+            },
+            categoryAxis:{
+                title:{visible:true}
+            },
+            valueAxis:{
+                title:{text:'Complaints'}
+            }
+        }">
+
+        <!-- Dataset -->
+        <viz:dataset>
+            <viz.data:FlattenedDataset data="{salesModel>/data}">
+                
+                <!-- Dynamic X-Axis -->
+                <viz.data:dimensions>
+                    <viz.data:DimensionDefinition
+                        name="Time"
+                        value="{salesModel>time}"/>
+                </viz.data:dimensions>
+
+                <!-- Y-Axis -->
+                <viz.data:measures>
+                    <viz.data:MeasureDefinition
+                        name="Complaints"
+                        value="{salesModel>sales}"/>
+                </viz.data:measures>
+
+            </viz.data:FlattenedDataset>
+        </viz:dataset>
+
+        <!-- Chart Feeds -->
+        <viz:feeds>
+            <viz.feeds:FeedItem
+                uid="valueAxis"
+                type="Measure"
+                values="Complaints"/>
+
+            <viz.feeds:FeedItem
+                uid="categoryAxis"
+                type="Dimension"
+                values="Time"/>
+        </viz:feeds>
+
+    </viz:VizFrame>
+
+</VBox>
+                                    </HBox>
+                                </VBox>
+                            </IconTabFilter>
+                        </items>
+                    </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,50 @@
+<mvc:View
+    controllerName="project7.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    height="100%">
+
+    <SplitApp id="loginSplitApp" mode="StretchCompressMode">
+        <masterPages>
+            <Page showHeader="false" class="welcomePanel">
+                <content>
+                    <VBox height="100%" width="100%" justifyContent="Center" alignItems="Center">
+                        <Image
+                            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                            width="150px"
+                            class="sapUiMediumMarginBottom"/>
+
+                        <Title
+                            text="Welcome!!!"
+                            level="H1"
+                            class="sapUiSmallMarginBottom"/>
+
+                        <Text
+                            text="Fill up personal information and start your journey with us."
+                            textAlign="Center"
+                            width="250px"/>
+                    </VBox>
+                </content>
+            </Page>
+        </masterPages>
+
+        <detailPages>
+            <Page showHeader="false">
+                <content>
+                    <VBox height="100%" width="100%" justifyContent="Center" alignItems="Center">
+                        <VBox width="400px">
+                            <Title text="Login to Account" level="H2" class="sapUiMediumMarginBottom"/>
+                            <Input id="usernameInput" placeholder="ID" width="100%"/>
+                            <Input id="passwordInput" placeholder="Password" type="Password" width="100%" class="sapUiSmallMarginTop"/>
+                            <HBox justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+                                <CheckBox text="Remember me" id="rememberCheck"/>
+                                <Link text="Forgot Password?" press="onForgotPassword"/>
+                            </HBox>
+                            <Button text="Log In" type="Emphasized" width="100%" class="sapUiMediumMarginTop" press="onLoginPress"/>
+                        </VBox>
+                    </VBox>
+                </content>
+            </Page>
+        </detailPages>
+    </SplitApp>
+</mvc:View>

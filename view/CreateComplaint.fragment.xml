@@ -1,0 +1,145 @@
+<!-- <core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+
+<Dialog
+    title="Create Complaint"
+    contentWidth="400px"
+    draggable="true"
+    resizable="true">
+
+<form:SimpleForm
+    editable="true"
+    layout="ResponsiveGridLayout"
+    labelSpanXL="3"
+    labelSpanL="3"
+    labelSpanM="4"
+    labelSpanS="12"
+    adjustLabelSpan="false"
+    emptySpanXL="0"
+    emptySpanL="0"
+    emptySpanM="0"
+    emptySpanS="0"
+    columnsXL="1"
+    columnsL="1"
+    columnsM="1">
+
+    <Label text="Complaint ID"/>
+    <Input
+        id="idComplaintID2"
+        editable="false"
+        placeholder="Will be generated automatically"/>
+
+    <Label text="Customer ID"/>
+    <Input
+        id="idCustomerID2"
+        placeholder="Example: CUST123"
+        liveChange="onCustomerIdValidate"/>
+
+    <Label text="Description"/>
+    <Input id="idDescription2"/>
+
+    <Label text="Status"/>
+    <Select id="idStatus2">
+        <core:Item key="OPEN" text="OPEN"/>
+        <core:Item key="IN_PROGRESS" text="IN_PROGRESS"/>
+        <core:Item key="RESOLVED" text="RESOLVED"/>
+    </Select>
+
+</form:SimpleForm>
+
+<buttons>
+    <Button
+        text="Submit"
+        type="Emphasized"
+        press="onSubmitComplaint"/>
+
+    <Button
+        text="Cancel"
+        press="onCloseCreateDialog"/>
+</buttons>
+
+</Dialog>
+
+</core:FragmentDefinition> -->
+
+
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+
+<Dialog
+    title="Create Complaint"
+    contentWidth="400px"
+    draggable="true"
+    resizable="true">
+
+<form:SimpleForm
+    editable="true"
+    layout="ResponsiveGridLayout"
+    labelSpanXL="3"
+    labelSpanL="3"
+    labelSpanM="4"
+    labelSpanS="12"
+    adjustLabelSpan="false"
+    emptySpanXL="0"
+    emptySpanL="0"
+    emptySpanM="0"
+    emptySpanS="0"
+    columnsXL="1"
+    columnsL="1"
+    columnsM="1">
+
+    <!-- Complaint ID -->
+    <Label text="Complaint ID"/>
+    <Input
+        id="idComplaintID2"
+        editable="false"
+        placeholder="Will be generated automatically"/>
+
+    <!-- Customer ID -->
+    <Label text="Customer ID"/>
+    <Input
+        id="idCustomerID2"
+        placeholder="Example: CUST123"
+        liveChange="onCustomerIdValidate"/>
+
+    <!-- New Customer Registration Link -->
+    <HBox justifyContent="End">
+        <Link
+            text="New Customer? Register here"
+            press="onOpenCustomerWizard"/>
+    </HBox>
+
+    <!-- Description -->
+    <Label text="Description"/>
+    <Input id="idDescription2"/>
+
+    <!-- Status -->
+    <Label text="Status"/>
+    <Select id="idStatus2">
+        <core:Item key="OPEN" text="OPEN"/>
+        <core:Item key="IN_PROGRESS" text="IN_PROGRESS"/>
+        <core:Item key="RESOLVED" text="RESOLVED"/>
+    </Select>
+
+</form:SimpleForm>
+
+<buttons>
+
+    <Button
+        text="Submit"
+        type="Emphasized"
+        press="onSubmitComplaint"/>
+
+    <Button
+        text="Cancel"
+        press="onCloseCreateDialog"/>
+
+</buttons>
+
+</Dialog>
+
+</core:FragmentDefinition>

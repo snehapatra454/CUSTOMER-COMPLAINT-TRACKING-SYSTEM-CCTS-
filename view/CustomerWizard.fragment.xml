@@ -1,0 +1,87 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+<Dialog
+    title="New Customer Registration"
+    contentWidth="500px"
+    draggable="true"
+    resizable="true">
+
+<Wizard id="customerWizard">
+
+<!-- Step 1 -->
+<WizardStep
+    title="Basic Information"
+    validated="true">
+
+<VBox class="sapUiSmallMargin">
+
+<Label text="Full Name"/>
+<Input id="custName"/>
+
+<Label text="Email"/>
+<Input id="custEmail" type="Email"/>
+
+<Label text="Phone Number"/>
+<Input id="custPhone"/>
+
+</VBox>
+
+</WizardStep>
+
+<!-- Step 2 -->
+<WizardStep
+    title="Address Information"
+    validated="true">
+
+<VBox class="sapUiSmallMargin">
+
+<Label text="Address"/>
+<Input id="custAddress"/>
+
+<Label text="City"/>
+<Input id="custCity"/>
+
+<Label text="Country"/>
+<Input id="custCountry"/>
+
+</VBox>
+
+</WizardStep>
+
+<!-- Step 3 -->
+<WizardStep
+    title="Account Setup"
+    validated="true">
+
+<VBox class="sapUiSmallMargin">
+
+<Label text="Password"/>
+<Input id="custPassword" type="Password"/>
+
+<Label text="Confirm Password"/>
+<Input id="custConfirmPassword" type="Password"/>
+
+</VBox>
+
+</WizardStep>
+
+</Wizard>
+
+<buttons>
+
+<Button
+    text="Create Customer"
+    type="Emphasized"
+    press="onCreateCustomer"/>
+
+<Button
+    text="Cancel"
+    press="onCloseCustomerWizard"/>
+
+</buttons>
+
+</Dialog>
+
+</core:FragmentDefinition>
